@@ -23,8 +23,12 @@ Edit `sites.json`:
 
 Device list lives at the top of `matrix.js` (`DEVICES`). Defaults:
 
-- iPhone 15, iPhone SE, Pixel 8, Galaxy S23, iPad Mini (Playwright built-in
-  descriptors), Desktop 1440x900.
+- iPhone 15, iPhone SE (Playwright built-in descriptors)
+- Pixel 8, Galaxy S23 — Android flagships (built-in descriptors)
+- Android Budget 360x640 — custom profile (Redmi-class UA, 360×640 viewport):
+  the most common real-world Android in India, where mobile breakage hides
+- Android Tall 412x915 — custom tall-Android profile
+- iPad Mini, Desktop 1440x900
 
 ## Usage
 

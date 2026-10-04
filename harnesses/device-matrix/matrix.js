@@ -12,15 +12,30 @@ const fs = require('fs');
 const path = require('path');
 const { chromium, devices } = require('playwright');
 
+// Strings = Playwright built-in descriptors. Objects = custom profiles, used
+// where no built-in exists — notably budget Android, the viewport most of
+// India actually browses on and where mobile breakage hides.
 const DEVICES = [
   'iPhone 15',
   'iPhone SE',
-  'Pixel 8',
-  'Galaxy S23',
+  'Pixel 8',            // Android flagship
+  'Galaxy S23',         // Android flagship
+  { name: 'Android Budget 360x640', label: 'Android (budget 360×640)', descriptor: {
+      viewport: { width: 360, height: 640 }, deviceScaleFactor: 2,
+      isMobile: true, hasTouch: true,
+      userAgent: 'Mozilla/5.0 (Linux; Android 13; Redmi Note 12 5G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+  } },
+  { name: 'Android Tall 412x915', label: 'Android (tall 412×915)', descriptor: {
+      viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.625,
+      isMobile: true, hasTouch: true,
+      userAgent: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36',
+  } },
   'iPad Mini',
   // Desktop has no built-in descriptor; defined inline below.
   'Desktop 1440x900',
 ];
+
+function devLabel(d) { return typeof d === 'string' ? d : (d.label || d.name); }
 
 function slug(s) {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -41,10 +56,13 @@ async function main() {
   try {
     for (const [pi, url] of urls.entries()) {
       grid[pi] = { url, cells: [] };
-      for (const devName of DEVICES) {
-        const descriptor = devName === 'Desktop 1440x900'
-          ? { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, isMobile: false, hasTouch: false }
-          : devices[devName];
+      for (const dev of DEVICES) {
+        const devName = typeof dev === 'string' ? dev : dev.name;
+        const descriptor = typeof dev === 'string'
+          ? (devName === 'Desktop 1440x900'
+              ? { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, isMobile: false, hasTouch: false }
+              : devices[devName])
+          : dev.descriptor;
         if (!descriptor) {
           console.error(`Unknown device descriptor: ${devName} — skipping`);
           continue;
@@ -72,7 +90,7 @@ async function main() {
     await browser.close();
   }
 
-  const headerCells = DEVICES.map((d) => `<th>${esc(d)}</th>`).join('');
+  const headerCells = DEVICES.map((d) => `<th>${esc(devLabel(d))}</th>`).join('');
   const rows = grid.map((row) => {
     const cells = row.cells.map((c) => {
       if (!c.file) return `<td class="err">capture failed<br><small>${esc(c.error || '')}</small></td>`;
