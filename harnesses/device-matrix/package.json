@@ -1,0 +1,1 @@
+{"dependencies":{"playwright":"^1.49.0"},"description":"Multi-device screenshot matrix for client sites (MusePowerCore)","name":"device-matrix","private":true,"scripts":{"matrix":"node matrix.js"},"version":"1.0.0"}

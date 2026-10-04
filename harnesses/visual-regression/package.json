@@ -1,0 +1,1 @@
+{"dependencies":{"pixelmatch":"^7.0.0","playwright":"^1.49.0","pngjs":"^7.0.0"},"description":"Before/after screenshot diffing for client-site deploys (MusePowerCore)","name":"visual-regression","private":true,"scripts":{"capture":"node capture.js","capture:baseline":"node capture.js --baseline","compare":"node compare.js"},"version":"1.0.0"}

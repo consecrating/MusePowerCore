@@ -1,0 +1,1 @@
+{"dependencies":{"playwright":"^1.49.0"},"description":"Mobile horizontal-overflow detector for client sites (MusePowerCore)","name":"overflow-hunter","private":true,"scripts":{"hunt":"node hunt.js"},"version":"1.0.0"}
