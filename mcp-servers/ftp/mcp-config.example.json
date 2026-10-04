@@ -1,0 +1,1 @@
+{"_comment":"Example MCP client config (Claude Desktop / Muse). Copy the 'ftp' block into your client's mcpServers. Set FTP_PASSWORD in your shell env, NOT here.","mcpServers":{"ftp":{"args":["/absolute/path/to/MusePowerCore/mcp-servers/ftp/server.py"],"command":"python3","env":{"FTP_HOST":"ftp.sanctify.co","FTP_PORT":"21","FTP_TLS":"1","FTP_USER":"demo3@demo3.sanctify.co"}}}}

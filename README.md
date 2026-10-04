@@ -17,6 +17,8 @@ dozens of live deploy rounds, encoded as reusable machinery instead of memory.
 | `harnesses/device-matrix` | Playwright | Screenshot matrix across iPhone / Pixel / Galaxy / iPad / desktop — the contact sheet that replaces "check mobile" |
 | `harnesses/overflow-hunter` | Playwright | Mobile horizontal-overflow detector — names the offending element (selector + pixels) with red-outlined screenshots |
 | `scripts/asset-optimize` | Python | Web-optimize image directories: downscale, re-encode, strip EXIF, emit WebP — never overwrites originals by default |
+| `scripts/ftp-deploy` | Python (stdlib) | Loud, safe, changed-files-only FTP deploys: sha256 manifest, per-file progress, dry-run plans, SIZE-verified uploads, automatic backups + rollback |
+| `mcp-servers/ftp` | MCP server (stdio) | Native FTP tools for the agent — list/diff/deploy/upload/download/mkdir/delete/rename/rollback as structured JSON, sharing the ftp-deploy core |
 
 ## Quickstart
 

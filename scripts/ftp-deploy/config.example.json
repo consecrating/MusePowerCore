@@ -1,0 +1,1 @@
+{"_comment":"ftp-deploy config. No password field on purpose — use the FTP_PASSWORD env var or the secure prompt.","host":"ftp.sanctify.co","local":"/path/to/local/site","port":21,"remote":"/","user":"demo3@demo3.sanctify.co"}
