@@ -9,6 +9,7 @@ dozens of live deploy rounds, encoded as reusable machinery instead of memory.
 | Component | Type | Purpose |
 | --------- | ---- | ------- |
 | `skills/site-deploy` | skill | FTP deploys for static client sites: fewest files, narrated progress, verify-live handoff |
+| `skills/ftp-first-run` | skill | First-run FTP rescue: one 15s data-channel probe, then the browser web-FTP route when direct FTP is blackholed — stops a fresh Muse struggling on its first upload |
 | `skills/markup-round` | skill | The one-round-at-a-time edit loop: marked-up screenshot + one-liner → exact change → deploy → prove live → "what's next?" |
 | `skills/live-verify` | skill | Post-deploy evidence gate: fetch fresh, screenshot, confirm the change is actually live — never claim from upload success alone |
 | `skills/wp-plugin-ops` | skill | WordPress plugin build → zip → install → activate → verify, with ask-before-live and no-stored-credentials rules |
